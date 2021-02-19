@@ -23,6 +23,11 @@ import java.util.ArrayList;
 import static java.lang.System.nanoTime;
 
 public class Main extends Application {
+    /**
+     * Line Chart to show recursive and iterative fibonacci time latency
+     * @param primaryStage
+     * @throws Exception
+     */
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -43,18 +48,35 @@ public class Main extends Application {
 
         XYChart.Series series = new XYChart.Series();
         series.setName("Recursive");
+
+        /**
+         * This is the call to the recursive method,
+         * then charts the results with each call.
+         */
         while(index <= 40) {
+            /**
+             * The following 3 print statements allow you to see the
+             * latency increase as recursive method execution increases.
+             */
             long start = System.nanoTime();
+            //System.out.println("  " + start);
             x = fib(index);
             long stop = System.nanoTime();
+            //System.out.println("- " + stop);
             long time = stop - start;
             series.getData().add(new XYChart.Data(index, time));
+            //System.out.println("      " + time);
             index++;
+            System.out.println(" ");
         }
 
         XYChart.Series series2 = new XYChart.Series();
         series2.setName("Iterative");
 
+        /**
+         * Loop for iterative fibonacci comparator.
+         * It charts a result set of time and sequence # eah time thru the loop
+         */
         for(int i=0;i <=40;i++) {
             c = a + b;
             a = b;
@@ -71,6 +93,11 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Function used recursively for fibonacci comparator.
+     * @param n input integer for the method to act on.
+     * @return - makes this method recursive
+     */
     public static long fib(int n) {
         if (n == 0) {
             return 0;
